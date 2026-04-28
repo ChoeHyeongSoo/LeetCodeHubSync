@@ -13,10 +13,10 @@ async function getRecentSubmissions() {
             'Cookie': `LEETCODE_SESSION=${LEETCODE_SESSION};`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        body: JSON.stringify({  // 💡username 수정
             query: `
             query recentAcSubmissions {
-                recentAcSubmissionList(username: "Eugene603", limit: 20) {
+                recentAcSubmissionList(username: "", limit: 20) {
                     id
                     statusDisplay
                 }
