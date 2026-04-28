@@ -1,0 +1,38 @@
+name: LeetCode Sync Action
+
+on:
+  schedule:
+    - cron: "0 18 * * *" # 매일 한국 시간 자정(UTC 15:00)에 자동 실행
+  workflow_dispatch: # 수동 실행 버튼 활성화
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node.js 18 버전 세팅 (내장 fetch API 사용을 위해 필수)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "CHS[github-actions]"
+          git config --global user.email "sam000208@naver.com"
+
+      - name: Run Node.js Sync Script
+        env:
+          LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }} # 깃허브 시크릿에서 가져옴
+        run: node scripts/sync_leetcode.js
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
