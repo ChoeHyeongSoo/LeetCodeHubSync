@@ -21,10 +21,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Configure Git
+      - name: Configure Git  # Git config 설정 : Name, Email
         run: |
-          git config --global user.name "CHS[github-actions]"
-          git config --global user.email "sam000208@naver.com"
+          git config --global user.name "[github-actions]"
+          git config --global user.email "Auto-Sub[github-actions]@github.com"
 
       - name: Run Node.js Sync Script
         env:
