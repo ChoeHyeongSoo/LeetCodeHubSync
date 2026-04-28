@@ -1,8 +1,8 @@
 name: LeetCode Sync Action
 
 on:
-  schedule:
-    - cron: "0 18 * * *" # 매일 한국 시간 자정(UTC 15:00)에 자동 실행
+  schedule:  # 원하는 시간 설정 부분
+    - cron: "0 18 * * *" # 매일 한국 시간 자정(UTC 18:00)에 자동 실행
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 permissions:
